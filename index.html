@@ -443,37 +443,48 @@
     }
 
     // 计算结果
-    function calculateResult() {
-        ei = [0,0,0]; sn = [0,0,0]; tf = [0,0,0]; jp = [0,0,0];
-        for(let i=0; i<50; i++) {
-            const ans = answers[i];
-            if(ans === null) continue;
-            if(i<12) { if(ans===0) ei[0]++; else if(ans===1) ei[1]++; else ei[2]++; }
-            else if(i<25) { if(ans===0) sn[0]++; else if(ans===1) sn[1]++; else sn[2]++; }
-            else if(i<37) { if(ans===0) tf[0]++; else if(ans===1) tf[1]++; else tf[2]++; }
-            else { if(ans===0) jp[0]++; else if(ans===1) jp[1]++; else jp[2]++; }
-        }
-        const getLetter = (arr, dimType) => {
-            const total = arr[0]+arr[1]+arr[2];
-            if(total===0) return 'X';
-            if(arr[2] > total*0.4) return 'X';
-            if(dimType==='EI') return arr[0]>=arr[1] ? 'E' : 'I';
-            if(dimType==='SN') return arr[0]>=arr[1] ? 'S' : 'N';
-            if(dimType==='TF') return arr[0]>=arr[1] ? 'T' : 'F';
-            return arr[0]>=arr[1] ? 'J' : 'P';
-        };
-        const e = getLetter(ei, 'EI');
-        const s = getLetter(sn, 'SN');
-        const t = getLetter(tf, 'TF');
-        const j = getLetter(jp, 'JP');
-        const code = e+s+t+j;
-        let name, desc;
+    // 计算结果
+function calculateResult() {
+    ei = [0,0,0]; sn = [0,0,0]; tf = [0,0,0]; jp = [0,0,0];
+    for(let i=0; i<50; i++) {
+        const ans = answers[i];
+        if(ans === null) continue;
+        if(i<12) { if(ans===0) ei[0]++; else if(ans===1) ei[1]++; else ei[2]++; }
+        else if(i<25) { if(ans===0) sn[0]++; else if(ans===1) sn[1]++; else sn[2]++; }
+        else if(i<37) { if(ans===0) tf[0]++; else if(ans===1) tf[1]++; else tf[2]++; }
+        else { if(ans===0) jp[0]++; else if(ans===1) jp[1]++; else jp[2]++; }
+    }
+    const getLetter = (arr, dimType) => {
+        const total = arr[0]+arr[1]+arr[2];
+        if(total===0) return 'X';
+        if(arr[2] > total*0.4) return 'X';
+        if(dimType==='EI') return arr[0]>=arr[1] ? 'E' : 'I';
+        if(dimType==='SN') return arr[0]>=arr[1] ? 'S' : 'N';
+        if(dimType==='TF') return arr[0]>=arr[1] ? 'T' : 'F';
+        return arr[0]>=arr[1] ? 'J' : 'P';
+    };
+    const e = getLetter(ei, 'EI');
+    const s = getLetter(sn, 'SN');
+    const t = getLetter(tf, 'TF');
+    const j = getLetter(jp, 'JP');
+    const code = e+s+t+j;
+    let name, desc;
+    
+    // === 修复逻辑：只有四个字母全是 X 才是逍遥散人 ===
+    if(code === 'XXXX') {
+        name = '逍遥散人'; 
+        desc = '不强求任何玩法，主打一个自在随缘。';
+    } else {
+        // 尝试匹配标准 16 型人格（忽略 X，用另一轴的倾向替代？这里简化：有 X 就显示「散修」）
         if(code.includes('X')) {
-            name = '逍遥散人'; desc = '不强求任何玩法，主打一个自在随缘。';
+            name = '江湖散修'; 
+            desc = '你有一面随性自在，但在某些方面仍有自己的坚持与风格。';
         } else {
             const p = personalityMap[code] || ['江湖异人','身怀绝技，不落窠臼。'];
             name = p[0]; desc = p[1];
         }
+    }
+    // ... 后面的显示逻辑保持不变
         document.getElementById('resultCode').textContent = code;
         document.getElementById('resultName').textContent = name;
         document.getElementById('resultDesc').textContent = desc;
