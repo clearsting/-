@@ -217,7 +217,6 @@
         }
         .toast-tip.show {
             opacity: 1;
-            pointer-events: none;
         }
         footer {
             margin-top: 20px;
@@ -233,7 +232,6 @@
         <h1>燕云·十六声</h1>
         <div class="subhead">—— 江 湖 人 格 录 ——</div>
 
-        <!-- 答题区域 -->
         <div id="testArea">
             <div class="progress-area">
                 <div class="progress-text">
@@ -255,18 +253,13 @@
             </div>
         </div>
 
-        <!-- 结果区域 -->
         <div id="resultArea" class="result-panel hidden">
             <div style="color:#b8a98a;">你的江湖人格</div>
             <div class="result-badge" id="resultCode">ISTJ</div>
             <div class="result-title" id="resultName">清河拾荒者</div>
             <div class="result-desc" id="resultDesc">全收集党，图鉴清道夫，觉瘴林生存专家</div>
-            
             <div class="dimension-detail" id="dimensionDetail"></div>
-            
-            <!-- 分享链接按钮 -->
             <button class="btn share-btn" id="shareLinkBtn">📋 复制链接 · 邀友同测</button>
-            
             <button class="btn reset-btn" id="resetBtn">重入江湖 · 再测一次</button>
             <p style="margin-top:18px;color:#9a9f84;">—— 燕云风起，自有归途 ——</p>
         </div>
@@ -274,126 +267,151 @@
     <footer>策马江湖 · 随心而答</footer>
 </div>
 
-<!-- 轻提示 -->
 <div id="toastMessage" class="toast-tip">链接已复制</div>
 
 <script>
 (function(){
     "use strict";
 
-    // ---------- 题库数据 ----------
+    // ========== 最终版题库 50题 A/B二选一 ==========
     const questions = [
-        "刚踏入清河，你的第一件事是？", "打完一场副本后，你通常？", "开封虹桥上站着一群玩家在闲聊，你会？",
-        "遇到解不开的谜题，你会？", "帮会组织集体活动，你的态度？", "你在江湖中最享受的状态是？",
-        "论剑场连输三把，你会？", "你建家园主要是为了？", "关于奇遇任务，你倾向于？", "如果副本强制只能匹配路人？",
-        "发现一个绝美拍照点，你会？", "你心中的“江湖朋友”更像是？", "学一套新武学，你更关注？",
-        "地图上未点亮的迷雾区域，你的驱动力是？", "搭建家园时，你更在意？", "关于觉瘴林，你印象最深的是？",
-        "你如何看待装备词条？", "做主线任务时，你对剧情的态度是？", "探索时发现一个山洞，你的反应是？",
-        "关于游戏里的采集系统，你？", "你更喜欢哪种战斗风格？", "燕云里的文物和考据内容，你？",
-        "对于 Boss 机制，你的学习方式是？", "你如何看待游戏里的成就系统？", "挑选一套新时装，你的标准是？",
-        "在觉瘴林深处发现一个倒地的伤员，你会？", "一件装备属性很差但外观绝美，你会？", "野外看到有人在欺负小号，你会？",
-        "帮会里有人求带副本，但你本来打算去钓鱼，你会？", "论剑场遇到明显打不过的大佬，你会？", "家园选址，你更看重？",
-        "一个奇遇任务需要你做出道德选择，你会？", "队里有人因为失误导致团灭，你会？", "拿到一件稀有材料，你会？",
-        "你如何看待游戏里的“善恶”系统？", "队伍里有人明显划水，你会？", "你选择加入一个帮会的首要标准是？",
-        "你的背包整理习惯是？", "做日常任务时，你的习惯是？", "探索时发现一个宝箱但需要绕路3分钟，明知里面只是几块铁矿，你会？",
-        "任务做到一半，路边突然出现一个发光的山洞，你会？", "关于游戏里的书籍和信札，你的态度是？", "你的家园布局方式是？",
-        "对于游戏活动的时间表，你？", "出门探索前，你的准备习惯是？", "看到世界上有人喊副本缺一个位置，你会？",
-        "游戏里攒了一笔钱，你会？", "你对游戏版本更新的态度是？", "关于角色的战力数值，你？", "如果要你用一句话总结你的江湖态度："
+        "刚进游戏的第一件事是？",
+        "打完副本后，你通常？",
+        "在附近频道看到一群玩家在闲聊，你会？",
+        "遇到解决不了的事",
+        "百业组织集体活动，你的态度？",
+        "你在游戏中最享受的状态",
+        "论剑场连输三把，你会？",
+        "你建家业主要是为了？",
+        "关于限时活动，你倾向于？",
+        "如果副本强制只能匹配路人？",
+        "发现一个绝美拍照点，你会？",
+        "你心中的\"江湖朋友\"更像是？",
+        "新出的武学你的关注点是",
+        "地图上未收集完的区域，你的驱动力是？",
+        "关于家业，你更在意？",
+        "关于觉瘴林，你印象最深的是？",
+        "你如何看待装备词条？",
+        "做主线任务时，你对剧情的态度是？",
+        "探索时发现燕云的小巧思，你的反应是？",
+        "当你做采集时你会？",
+        "你更喜欢哪种战斗风格？",
+        "燕云里的文物和考据内容，你？",
+        "对于副本机制，你的学习方式是？",
+        "你如何看待游戏里的成就系统？",
+        "挑选一套新时装，你的标准是？",
+        "有人生病求助你会？",
+        "一件衣服成套很丑但混搭后好看，你会？",
+        "看到有人在欺负人你会？",
+        "百业里有人求带副本，但你本来打算做其他的，你会？",
+        "打论剑时遇到小代或路人王，你会？",
+        "家业住宅选址，你更看重？",
+        "一个万事知任务需要你做出选择，你会？",
+        "队里有人有内鬼导致团灭，你会？",
+        "开箱出去龙骨图你会",
+        "你如何看待游戏里的悬赏系统？",
+        "打本时里有人明显划水，你会？",
+        "你选择加入一个百业的首要标准是？",
+        "你的包裹整理习惯是？",
+        "做江湖声望时，你的习惯是？",
+        "探索时发现一个所谓的隐藏宝箱但需要绕路3分钟，收益不如卖菜，你会？",
+        "任务做到一半，在路边发现一个天工地窟，你会？",
+        "关于游戏里的书籍和信札，你的态度是？",
+        "你的家业布局方式是？",
+        "对于周一打本的时间，你？",
+        "开宝箱做收集前你习惯",
+        "看到百业频道上有人喊副本缺一个位置，你会？",
+        "你攒了5000W宝钱，你会？",
+        "你对游戏版本更新的态度是？",
+        "关于武学造诣，你？",
+        "如果要你用一句话总结你的想法："
     ];
 
     const optionTexts = [
-        ["打开世界频道喊一声“有无一起玩的”","默默关掉所有频道，独自上路","随缘，有人搭话就聊，没人就自己逛"],
-        ["和队友聊几句，加个好友下次再约","立刻退队，享受一个人的安静时光","看情况，聊得来就多待会儿，否则直接撤"],
-        ["凑过去一起热闹","绕道走，人太多有点烦","路过看一眼"],
-        ["在频道直接求助","自己死磕到底","先自己试试，不行再问"],
-        ["有空必到","能推就推","看心情"],
-        ["和固定队友语音边聊边玩","一个人骑马听BGM","时而组队时而独行"],
-        ["在频道吐槽","默默关游戏","无所谓"],
-        ["请朋友参观","给自己独处空间","随便搭搭"],
-        ["和路人研究","完全自己摸索","随缘触发"],
-        ["没问题","宁愿带NPC","还行"],
-        ["立刻分享","偷偷收藏","拍完就忘了"],
-        ["并肩作战的同行者","神交即可","萍水相逢"],
-        ["伤害数值、帧数","意境、手感","帅就完事"],
-        ["可能有宝箱材料","好奇风景故事","路过就开"],
-        ["材料耐久、对称","意境光影","能摆就行"],
-        ["毒蘑菇刷新点","诡秘氛围","太阴间了"],
-        ["研究每条属性","差不多能用","几乎不看"],
-        ["仔细看每句对话","感受氛围","能跳就跳"],
-        ["标记资源","好奇隐藏剧情","好看就进"],
-        ["记刷新点规划路线","看到就采","够用就行"],
-        ["研究连招","凭感觉","哪个亮了按哪个"],
-        ["仔细阅读介绍","关注历史氛围","基本不看"],
-        ["看攻略背时间轴","灭几次靠感觉","等队友带"],
-        ["规划全成就","有意思的成就开心","随缘"],
-        ["看面料质感染色","整体感觉","免费就穿"],
-        ["计算解毒药数量","先救人","让别人救"],
-        ["绝对不穿","穿上！好看一辈子","截图换上"],
-        ["评估实力再出手","直接冲上去","看热闹"],
-        ["看对方是谁","放下鱼竿帮忙","装不在"],
-        ["死磕到底","心生佩服","领保底下一把"],
-        ["离传送点近","窗外风景","系统默认"],
-        ["想清楚后果收益","遵从内心第一感觉","随便选"],
-        ["复盘指出问题","安慰对方","沉默"],
-        ["规划好用途","做成喜欢的东西","扔仓库"],
-        ["计算代价","凭心而动","没关注过"],
-        ["直接指出来","忍一忍","无所谓"],
-        ["帮会等级福利","氛围好","随便加"],
-        ["分类井井有条","随性整理","从不整理"],
-        ["按固定顺序清完","看心情","经常忘了"],
-        ["必须去拿","记下位置以后来","不去"],
-        ["记下位置，做完任务回来","立刻钻进去","不吸引人就继续赶路"],
-        ["每本必捡必读","随缘","基本不捡"],
-        ["提前画图纸","想到哪搭到哪","没认真弄过"],
-        ["记在心里准时参加","想起来参加","经常错过"],
-        ["检查装备药品","大概看看","直接出门"],
-        ["看日常清完没","想去就去","懒得动"],
-        ["规划用途提升战力","看到喜欢的就买","存着"],
-        ["提前看公告规划","自己发现","随缘"],
-        ["有明确目标计划","不焦虑","几乎不看"],
-        ["目标明确","随心而行","一切随缘"]
+        ["打开好友列表找搭子", "看看有没啥活动和任务"],
+        ["继续打黑工，或其他活动", "回到单人世界挂机"],
+        ["加入聊天，或者看他们聊天", "丝毫不在意"],
+        ["寻求好友帮助", "自己死磕到底，绝不多问一句"],
+        ["有空必到，人多才好玩", "能推就推，更喜欢一个人"],
+        ["和好友组队玩耍", "一个人闲逛做做活动"],
+        ["用各种方法分享吐槽", "自己消化情绪"],
+        ["请朋友来参观，听夸夸", "单纯升级"],
+        ["和好友一起研究合作", "自己一个人享受独享的成就感"],
+        ["没问题，匹配到谁都是缘分", "宁愿和人机打也不想和路人打"],
+        ["立刻分享给好友", "偷偷收藏，然后美美出片"],
+        ["一起玩耍的好搭子", "偶尔一起玩耍就ok"],
+        ["武学的伤害、搭配效果、霸体效果、无敌帧等", "武学的美术、整体的操作手感"],
+        ["那里的宝箱、图鉴、材料没拿", "单纯好奇该区域接下来的故事"],
+        ["单纯给家业升级拿奖励", "建筑的整体意境、光影氛围、环境融合"],
+        ["一群老六以及战斗爽", "要来一局紧张刺激的觉瘴林吗？"],
+        ["仔细研究每条属性的收益，追求最优配装", "大概看看，差不多能用就行"],
+        ["仔细看每一句对话，梳理人物关系", "沉浸在剧情氛围里，感受情绪和意境"],
+        ["先试着尝试一下", "好奇会不会和剧情有关联"],
+        ["规划最优采集路线", "看到就采，不会特意去采集"],
+        ["研究连招压制、抓破绽、计算冷却", "凭感觉打，打出自己的节奏和风格"],
+        ["偶尔会看看介绍，但大多直接跳过", "关注并结合真实历史和文物"],
+        ["看攻略视频，背时间轴，记技能顺序", "进去灭几次，然后慢慢记住"],
+        ["想要全收集", "不强求"],
+        ["关注质感、染色、细节和是否符合游戏中的时代", "整体感觉对不对，和角色气质搭不搭"],
+        ["没事做就去治病", "直接去治病"],
+        ["不穿", "选择混搭"],
+        ["事不关己", "帮帮场子"],
+        ["看对方是谁，熟人就带", "开麦指挥"],
+        ["上了再说，就当学学连招", "摆烂"],
+        ["不是很在意", "窗外的风景好不好看、有没有氛围"],
+        ["想清楚每个选项的后果和收益再选", "遵从自己内心的第一感觉"],
+        ["复盘失误原因，指出问题", "下把再这样就优化了"],
+        ["发财了卖了！！！", "自己收集材料自己做"],
+        ["研究过悬赏就算不爽对方也会计算付出的代价", "直接让对方飞起来(神鹰哥同款手势)"],
+        ["直接指出来", "打本前说好就行"],
+        ["百业的要求、福利、活动是否规范", "百业的氛围好不好"],
+        ["每次都要点一下整理", "偶尔点一下整理，平时无所谓"],
+        ["按固定顺序清完，一条龙不落", "直接觉瘴林见"],
+        ["必须去拿，看到后不拿就难受", "记一下位置，以后顺路再来"],
+        ["记下位置，任务做完再回来看", "先钻进去探个究竟"],
+        ["可能有剧情所以每本必捡必读", "无所谓"],
+        ["找到图纸直接套", "想到哪搭到哪，随性发挥"],
+        ["记在心里或设闹钟，准时参加", "知道个大概，有时间就参加"],
+        ["看视频，标点提前规划路线", "不强求"],
+        ["看看自己日常清完了没，有余力就去", "打黑工"],
+        ["规划好用途，优先提升战力", "先买八音窍"],
+        ["更新后看公告，看看武学有无增强和削弱", "不看公告就是玩"],
+        ["有明确的目标和提升计划", "对此没有太大要求"],
+        ["目标明确，步步为营", "随心而行，享受当下"]
     ];
 
-    // 维度映射：简化计分 (A=0, B=1, C=2)
-    // 1-12 EI, 13-25 SN, 26-37 TF, 38-50 JP
-    const dimMap = [];
-    for(let i=0; i<12; i++) dimMap.push([[1,0,0,0],[0,1,0,0],[0,0,0,0]]);
-    for(let i=12; i<25; i++) dimMap.push([[0,0,1,0],[0,0,0,1],[0,0,0,0]]);
-    for(let i=25; i<37; i++) dimMap.push([[0,0,0,1],[0,0,0,0],[0,0,0,0]]);
-    for(let i=37; i<50; i++) dimMap.push([[0,0,0,0],[0,0,0,0],[0,0,0,1]]);
-    // 修正 TF: A=T(0,0,1,0) B=F(0,0,0,1) C=佛(0,0,0,0)
-    for(let i=25; i<37; i++) dimMap[i] = [[0,0,1,0],[0,0,0,1],[0,0,0,0]];
-    // 修正 JP: A=J(0,0,0,1) B=P(0,0,0,0) C=佛(0,0,0,0) —— 改一下: B维度放JP-感知
-    for(let i=37; i<50; i++) dimMap[i] = [[0,0,0,1],[0,0,0,0],[0,0,0,0]];
-    // 微调：J=1 P=0 佛=0
-    for(let i=37; i<50; i++) { dimMap[i][1] = [0,0,0,0]; dimMap[i][1][3] = 0; } // B选P不加J
+    // ========== 维度映射 ==========
+    // 1-12: E/I (A=E外向, B=I内向)
+    // 13-25: S/N (A=S实感, B=N直觉)
+    // 26-37: T/F (A=T理性, B=F情感)
+    // 38-50: J/P (A=J判断, B=P感知)
 
-    // 人格库
+    // ========== 人格库 ==========
     const personalityMap = {
-        "ISTJ": ["清河拾荒者","全收集党，图鉴清道夫，觉瘴林生存专家"],
-        "ISFJ": ["青溪守宅人","佛系建筑师，默默守护家园，温暖可靠"],
-        "INFJ": ["孤云说书人","旅游党，沉浸剧情，心怀江湖大义"],
-        "INTJ": ["墨山布阵师","硬核觉瘴林玩家，策略大师，独行规划者"],
-        "ISTP": ["积粮刺客","PVP野外独狼，冷静的操作流"],
-        "ISFP": ["醉花阴散人","换装党+风景党，江湖艺术家"],
-        "INFP": ["天涯流浪客","纯粹旅游玩家，理想主义江湖客"],
-        "INTP": ["天泉问道者","机制探索党，只对“为什么”感兴趣"],
-        "ESTP": ["狂澜弄潮儿","PVP狂热分子，享受竞技快感"],
-        "ESFP": ["开封交际花","社交换装党，哪里有热闹哪里就有TA"],
-        "ENFP": ["清河探险家","纯粹探索玩家，好奇驱动一切"],
-        "ENTP": ["无名诡辩者","PVP心理战大师，享受博弈乐趣"],
-        "ESTJ": ["天泉大管事","全收集+效率至上，帮会管理型"],
-        "ESFJ": ["青溪掌门人","PVE团队润滑剂，气氛组担当"],
-        "ENFJ": ["江湖引路人","PVE指挥型，兼济天下的大哥/大姐"],
-        "ENTJ": ["开封城主","目标导向的全能型，什么都要最强"]
+        "ISTJ": ["清河拾荒者", "全收集党，图鉴清道夫，规划至上"],
+        "ISFJ": ["青溪守宅人", "佛系建筑师，默默守护，温暖可靠"],
+        "INFJ": ["孤云说书人", "沉浸剧情，心怀江湖大义"],
+        "INTJ": ["墨山布阵师", "策略大师，独行规划者"],
+        "ISTP": ["积粮刺客", "PVP野外独狼，冷静的操作流"],
+        "ISFP": ["醉花阴散人", "换装党+风景党，江湖艺术家"],
+        "INFP": ["天涯流浪客", "纯粹探索玩家，理想主义江湖客"],
+        "INTP": ["天泉问道者", "机制探索党，只对\"为什么\"感兴趣"],
+        "ESTP": ["狂澜弄潮儿", "PVP狂热分子，享受竞技快感"],
+        "ESFP": ["开封交际花", "社交换装党，哪里有热闹哪里就有TA"],
+        "ENFP": ["清河探险家", "纯粹探索玩家，好奇驱动一切"],
+        "ENTP": ["无名诡辩者", "PVP心理战大师，享受博弈乐趣"],
+        "ESTJ": ["天泉大管事", "全收集+效率至上，帮会管理型"],
+        "ESFJ": ["青溪掌门人", "PVE团队润滑剂，气氛组担当"],
+        "ENFJ": ["江湖引路人", "PVE指挥型，兼济天下的大哥/大姐"],
+        "ENTJ": ["开封城主", "目标导向的全能型，什么都要最强"]
     };
 
-    // 状态变量
+    // ========== 状态变量 ==========
     let currentIndex = 0;
     const answers = new Array(50).fill(null);
-    let ei = [0,0,0], sn = [0,0,0], tf = [0,0,0], jp = [0,0,0];
+    let ei = [0, 0], sn = [0, 0], tf = [0, 0], jp = [0, 0];
 
-    // DOM 元素
+    // ========== DOM 元素 ==========
     const qText = document.getElementById('qText');
     const optionsDiv = document.getElementById('optionsContainer');
     const prevBtn = document.getElementById('prevBtn');
@@ -406,29 +424,29 @@
     const progressFill = document.getElementById('progressFill');
     const toastEl = document.getElementById('toastMessage');
 
-    // 轻提示
+    // ========== 轻提示 ==========
     function showToast(msg) {
         toastEl.textContent = msg || '🔗 链接已复制';
         toastEl.classList.add('show');
         setTimeout(() => toastEl.classList.remove('show'), 2000);
     }
 
-    // 渲染题目
+    // ========== 渲染题目 ==========
     function renderQuestion(index) {
         qText.textContent = questions[index];
-        const section = index<12?'入世':(index<25?'观心':(index<37?'执念':'归途'));
-        qNumLabel.textContent = `第${index+1}问 · ${section}`;
-        currentQDisplay.textContent = `第 ${index+1} / 50 问`;
-        const pct = Math.round((index+1)/50*100);
+        const section = index < 12 ? '入世' : (index < 25 ? '观心' : (index < 37 ? '执念' : '归途'));
+        qNumLabel.textContent = `第${index + 1}问 · ${section}`;
+        currentQDisplay.textContent = `第 ${index + 1} / 50 问`;
+        const pct = Math.round((index + 1) / 50 * 100);
         progressPercent.textContent = pct + '%';
         progressFill.style.width = pct + '%';
 
         const selected = answers[index];
         let html = '';
         const opts = optionTexts[index];
-        for(let i=0; i<3; i++) {
-            const letter = i===0?'A':(i===1?'B':'C');
-            html += `<div class="option ${selected===i?'selected':''}" data-opt="${i}"><span class="option-prefix">${letter}</span>${opts[i]}</div>`;
+        for (let i = 0; i < 2; i++) {
+            const letter = i === 0 ? 'A' : 'B';
+            html += `<div class="option ${selected === i ? 'selected' : ''}" data-opt="${i}"><span class="option-prefix">${letter}</span>${opts[i]}</div>`;
         }
         optionsDiv.innerHTML = html;
         document.querySelectorAll('.option').forEach(el => {
@@ -442,49 +460,45 @@
         nextBtn.textContent = index === 49 ? '揭晓人格' : '下一问 →';
     }
 
-    // 计算结果
-    // 计算结果
-function calculateResult() {
-    ei = [0,0,0]; sn = [0,0,0]; tf = [0,0,0]; jp = [0,0,0];
-    for(let i=0; i<50; i++) {
-        const ans = answers[i];
-        if(ans === null) continue;
-        if(i<12) { if(ans===0) ei[0]++; else if(ans===1) ei[1]++; else ei[2]++; }
-        else if(i<25) { if(ans===0) sn[0]++; else if(ans===1) sn[1]++; else sn[2]++; }
-        else if(i<37) { if(ans===0) tf[0]++; else if(ans===1) tf[1]++; else tf[2]++; }
-        else { if(ans===0) jp[0]++; else if(ans===1) jp[1]++; else jp[2]++; }
-    }
-    const getLetter = (arr, dimType) => {
-        const total = arr[0]+arr[1]+arr[2];
-        if(total===0) return 'X';
-        if(arr[2] > total*0.4) return 'X';
-        if(dimType==='EI') return arr[0]>=arr[1] ? 'E' : 'I';
-        if(dimType==='SN') return arr[0]>=arr[1] ? 'S' : 'N';
-        if(dimType==='TF') return arr[0]>=arr[1] ? 'T' : 'F';
-        return arr[0]>=arr[1] ? 'J' : 'P';
-    };
-    const e = getLetter(ei, 'EI');
-    const s = getLetter(sn, 'SN');
-    const t = getLetter(tf, 'TF');
-    const j = getLetter(jp, 'JP');
-    const code = e+s+t+j;
-    let name, desc;
-    
-    // === 修复逻辑：只有四个字母全是 X 才是逍遥散人 ===
-    if(code === 'XXXX') {
-        name = '逍遥散人'; 
-        desc = '不强求任何玩法，主打一个自在随缘。';
-    } else {
-        // 尝试匹配标准 16 型人格（忽略 X，用另一轴的倾向替代？这里简化：有 X 就显示「散修」）
-        if(code.includes('X')) {
-            name = '江湖散修'; 
+    // ========== 计算结果 ==========
+    function calculateResult() {
+        ei = [0, 0]; sn = [0, 0]; tf = [0, 0]; jp = [0, 0];
+        for (let i = 0; i < 50; i++) {
+            const ans = answers[i];
+            if (ans === null) continue;
+            if (i < 12) { if (ans === 0) ei[0]++; else ei[1]++; }
+            else if (i < 25) { if (ans === 0) sn[0]++; else sn[1]++; }
+            else if (i < 37) { if (ans === 0) tf[0]++; else tf[1]++; }
+            else { if (ans === 0) jp[0]++; else jp[1]++; }
+        }
+
+        const getLetter = (arr, dimType) => {
+            if (arr[0] === arr[1]) return 'X';
+            if (dimType === 'EI') return arr[0] > arr[1] ? 'E' : 'I';
+            if (dimType === 'SN') return arr[0] > arr[1] ? 'S' : 'N';
+            if (dimType === 'TF') return arr[0] > arr[1] ? 'T' : 'F';
+            return arr[0] > arr[1] ? 'J' : 'P';
+        };
+
+        const e = getLetter(ei, 'EI');
+        const s = getLetter(sn, 'SN');
+        const t = getLetter(tf, 'TF');
+        const j = getLetter(jp, 'JP');
+        const code = e + s + t + j;
+
+        let name, desc;
+        if (code === 'XXXX') {
+            name = '逍遥散人';
+            desc = '不强求任何玩法，主打一个自在随缘。';
+        } else if (code.includes('X')) {
+            name = '江湖散修';
             desc = '你有一面随性自在，但在某些方面仍有自己的坚持与风格。';
         } else {
-            const p = personalityMap[code] || ['江湖异人','身怀绝技，不落窠臼。'];
-            name = p[0]; desc = p[1];
+            const p = personalityMap[code] || ['江湖异人', '身怀绝技，不落窠臼。'];
+            name = p[0];
+            desc = p[1];
         }
-    }
-    // ... 后面的显示逻辑保持不变
+
         document.getElementById('resultCode').textContent = code;
         document.getElementById('resultName').textContent = name;
         document.getElementById('resultDesc').textContent = desc;
@@ -494,11 +508,12 @@ function calculateResult() {
             <div class="dim-item"><span class="dim-label">决策</span><span class="dim-value">${t}</span></div>
             <div class="dim-item"><span class="dim-label">处世</span><span class="dim-value">${j}</span></div>
         `;
+
         testArea.classList.add('hidden');
         resultArea.classList.remove('hidden');
     }
 
-    // 复制分享链接
+    // ========== 复制分享链接 ==========
     function copyShareLink() {
         const url = window.location.href;
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -509,36 +524,55 @@ function calculateResult() {
             fallbackCopy(url);
         }
     }
+
     function fallbackCopy(text) {
         const textarea = document.createElement('textarea');
         textarea.value = text;
-        textarea.style.position = 'fixed'; textarea.style.opacity = '0';
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
         document.body.appendChild(textarea);
         textarea.select();
-        try { document.execCommand('copy'); showToast('🔗 链接已复制'); } 
-        catch(e) { alert('复制失败，请手动复制网址'); }
+        try {
+            document.execCommand('copy');
+            showToast('🔗 链接已复制');
+        } catch (e) {
+            alert('复制失败，请手动复制网址');
+        }
         document.body.removeChild(textarea);
     }
 
-    // 事件绑定
-    nextBtn.addEventListener('click', ()=>{
-        if(answers[currentIndex] === null) { showToast('请先选择一个选项'); return; }
-        if(currentIndex === 49) calculateResult();
-        else { currentIndex++; renderQuestion(currentIndex); }
+    // ========== 事件绑定 ==========
+    nextBtn.addEventListener('click', () => {
+        if (answers[currentIndex] === null) {
+            showToast('请先选择一个选项');
+            return;
+        }
+        if (currentIndex === 49) {
+            calculateResult();
+        } else {
+            currentIndex++;
+            renderQuestion(currentIndex);
+        }
     });
-    prevBtn.addEventListener('click', ()=>{
-        if(currentIndex > 0) { currentIndex--; renderQuestion(currentIndex); }
+
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            renderQuestion(currentIndex);
+        }
     });
-    document.getElementById('resetBtn').addEventListener('click', ()=>{
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
         answers.fill(null);
         currentIndex = 0;
         testArea.classList.remove('hidden');
         resultArea.classList.add('hidden');
         renderQuestion(0);
     });
+
     document.getElementById('shareLinkBtn').addEventListener('click', copyShareLink);
 
-    // 启动
+    // ========== 启动 ==========
     renderQuestion(0);
 })();
 </script>
