@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>燕云十六声 · 江湖人格测试</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Noto Serif SC', '华文楷体', 'KaiTi', serif;
             background: #1a1e1b;
@@ -18,10 +14,7 @@
             color: #e6e0d0;
             padding: 20px 12px 40px;
         }
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
+        .container { max-width: 700px; margin: 0 auto; }
         .test-card {
             background: rgba(25, 35, 25, 0.75);
             backdrop-filter: blur(8px);
@@ -48,46 +41,13 @@
             padding-bottom: 16px;
             margin-bottom: 20px;
         }
-        .progress-area {
-            margin-bottom: 28px;
-        }
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-            color: #c0b79a;
-        }
-        .progress-bar-bg {
-            height: 6px;
-            background: #2a3228;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .progress-bar-fill {
-            height: 6px;
-            background: linear-gradient(90deg, #a1b89a, #cfc3a0);
-            width: 0%;
-            border-radius: 10px;
-        }
-        .q-num {
-            font-size: 0.85rem;
-            color: #a7b69c;
-            margin-bottom: 12px;
-            border-left: 3px solid #b89a6a;
-            padding-left: 12px;
-        }
-        .q-text {
-            font-size: 1.3rem;
-            line-height: 1.4;
-            margin-bottom: 28px;
-            color: #efe6d4;
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .progress-area { margin-bottom: 28px; }
+        .progress-text { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 6px; color: #c0b79a; }
+        .progress-bar-bg { height: 6px; background: #2a3228; border-radius: 10px; overflow: hidden; }
+        .progress-bar-fill { height: 6px; background: linear-gradient(90deg, #a1b89a, #cfc3a0); width: 0%; border-radius: 10px; }
+        .q-num { font-size: 0.85rem; color: #a7b69c; margin-bottom: 12px; border-left: 3px solid #b89a6a; padding-left: 12px; }
+        .q-text { font-size: 1.3rem; line-height: 1.4; margin-bottom: 28px; color: #efe6d4; }
+        .options { display: flex; flex-direction: column; gap: 12px; }
         .option {
             background: rgba(30, 40, 30, 0.7);
             border: 1px solid #5f6e52;
@@ -98,21 +58,9 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .option.selected {
-            background: #4a6240;
-            border-color: #dac29c;
-            box-shadow: 0 0 12px #b9a57780;
-        }
-        .option-prefix {
-            font-weight: bold;
-            margin-right: 12px;
-            color: #cdbb98;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-        }
+        .option.selected { background: #4a6240; border-color: #dac29c; box-shadow: 0 0 12px #b9a57780; }
+        .option-prefix { font-weight: bold; margin-right: 12px; color: #cdbb98; }
+        .nav-buttons { display: flex; gap: 12px; margin-top: 24px; }
         .btn {
             background: #2a3527;
             border: 1px solid #7f9470;
@@ -126,38 +74,43 @@
             font-family: inherit;
             transition: all 0.15s;
         }
-        .btn:active {
-            background: #3e5437;
-            transform: scale(0.97);
-        }
-        .btn:disabled {
-            opacity: 0.3;
-            pointer-events: none;
-        }
-        .result-panel {
+        .btn:active { background: #3e5437; transform: scale(0.97); }
+        .btn:disabled { opacity: 0.3; pointer-events: none; }
+        .result-panel { text-align: center; }
+        .nickname-badge {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #d4c0a0;
+            text-shadow: 0 0 15px #c0a07080;
+            margin: 10px 0 5px;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            padding: 0 10px;
+            line-height: 1.3;
             text-align: center;
         }
-        .result-badge {
-            font-size: 4rem;
-            letter-spacing: 6px;
-            color: #e6d8b8;
-            margin: 15px 0;
-            text-shadow: 0 0 12px #9bb87b60;
+        @media (max-width: 480px) {
+            .nickname-badge {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
         }
-        .result-title {
-            font-size: 2rem;
-            color: #f1e7cf;
-            margin-bottom: 8px;
-        }
+        .result-title { font-size: 2rem; color: #f1e7cf; margin-bottom: 8px; }
         .result-desc {
-            font-size: 1rem;
-            padding: 10px 20px;
-            color: #ccc2a8;
-            margin-bottom: 25px;
-            background: #1f2a1c80;
-            border-radius: 40px;
-            display: inline-block;
-        }
+    font-size: 0.95rem;
+    padding: 12px 18px;
+    color: #ccc2a8;
+    margin-bottom: 25px;
+    background: #1f2a1c80;
+    border-radius: 40px;
+    display: inline-block;
+    font-style: italic;
+    max-width: 90%;
+    line-height: 1.5;
+}
         .dimension-detail {
             display: flex;
             flex-wrap: wrap;
@@ -168,35 +121,13 @@
             padding: 18px;
             border-radius: 60px;
         }
-        .dim-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .dim-label {
-            font-size: 0.8rem;
-            color: #b1aa91;
-        }
-        .dim-value {
-            font-size: 1.8rem;
-            color: #efe0bc;
-        }
-        .share-btn {
-            background: #4a5a3a;
-            border: 1px solid #c0b080;
-            margin-bottom: 12px;
-        }
-        .share-btn:active {
-            background: #5e7250;
-        }
-        .reset-btn {
-            background: #3f4e34;
-            border: 1px solid #bcae84;
-            width: 100%;
-        }
-        .hidden {
-            display: none !important;
-        }
+        .dim-item { display: flex; flex-direction: column; align-items: center; }
+        .dim-label { font-size: 0.8rem; color: #b1aa91; }
+        .dim-value { font-size: 1.8rem; color: #efe0bc; }
+        .share-btn { background: #4a5a3a; border: 1px solid #c0b080; margin-bottom: 12px; }
+        .share-btn:active { background: #5e7250; }
+        .reset-btn { background: #3f4e34; border: 1px solid #bcae84; width: 100%; }
+        .hidden { display: none !important; }
         .toast-tip {
             position: fixed;
             bottom: 30px;
@@ -215,15 +146,8 @@
             pointer-events: none;
             white-space: nowrap;
         }
-        .toast-tip.show {
-            opacity: 1;
-        }
-        footer {
-            margin-top: 20px;
-            color: #6a7a5e;
-            text-align: center;
-            font-size: 0.75rem;
-        }
+        .toast-tip.show { opacity: 1; }
+        footer { margin-top: 20px; color: #6a7a5e; text-align: center; font-size: 0.75rem; }
     </style>
 </head>
 <body>
@@ -254,10 +178,10 @@
         </div>
 
         <div id="resultArea" class="result-panel hidden">
-            <div style="color:#b8a98a;">你的江湖人格</div>
-            <div class="result-badge" id="resultCode">ISTJ</div>
-            <div class="result-title" id="resultName">清河拾荒者</div>
-            <div class="result-desc" id="resultDesc">全收集党，图鉴清道夫，觉瘴林生存专家</div>
+            <div style="color:#b8a98a; font-size:0.9rem;">你的江湖人格</div>
+            <div class="nickname-badge" id="nicknameBadge">LUNJIANLAO</div>
+            <div class="result-title" id="resultName">论剑佬</div>
+            <div class="result-desc" id="resultDesc">我的一辈子都被PVP毁了</div>
             <div class="dimension-detail" id="dimensionDetail"></div>
             <button class="btn share-btn" id="shareLinkBtn">📋 复制链接 · 邀友同测</button>
             <button class="btn reset-btn" id="resetBtn">重入江湖 · 再测一次</button>
@@ -273,7 +197,7 @@
 (function(){
     "use strict";
 
-    // ========== 最终版题库 50题 A/B二选一 ==========
+    // ========== 题库 50题 A/B/C三选一 ==========
     const questions = [
         "刚进游戏的第一件事是？",
         "打完副本后，你通常？",
@@ -308,13 +232,13 @@
         "家业住宅选址，你更看重？",
         "一个万事知任务需要你做出选择，你会？",
         "队里有人有内鬼导致团灭，你会？",
-        "开箱出去龙骨图你会",
+        "开箱出开出龙骨图你会",
         "你如何看待游戏里的悬赏系统？",
         "打本时里有人明显划水，你会？",
         "你选择加入一个百业的首要标准是？",
         "你的包裹整理习惯是？",
         "做江湖声望时，你的习惯是？",
-        "探索时发现一个所谓的隐藏宝箱但需要绕路3分钟，收益不如卖菜，你会？",
+        "探索时发现一个所谓的隐藏宝箱但需要绕路3分钟，收益不如做菜，你会？",
         "任务做到一半，在路边发现一个天工地窟，你会？",
         "关于游戏里的书籍和信札，你的态度是？",
         "你的家业布局方式是？",
@@ -328,88 +252,106 @@
     ];
 
     const optionTexts = [
-        ["打开好友列表找搭子", "看看有没啥活动和任务"],
-        ["继续打黑工，或其他活动", "回到单人世界挂机"],
-        ["加入聊天，或者看他们聊天", "丝毫不在意"],
-        ["寻求好友帮助", "自己死磕到底，绝不多问一句"],
-        ["有空必到，人多才好玩", "能推就推，更喜欢一个人"],
-        ["和好友组队玩耍", "一个人闲逛做做活动"],
-        ["用各种方法分享吐槽", "自己消化情绪"],
-        ["请朋友来参观，听夸夸", "单纯升级"],
-        ["和好友一起研究合作", "自己一个人享受独享的成就感"],
-        ["没问题，匹配到谁都是缘分", "宁愿和人机打也不想和路人打"],
-        ["立刻分享给好友", "偷偷收藏，然后美美出片"],
-        ["一起玩耍的好搭子", "偶尔一起玩耍就ok"],
-        ["武学的伤害、搭配效果、霸体效果、无敌帧等", "武学的美术、整体的操作手感"],
-        ["那里的宝箱、图鉴、材料没拿", "单纯好奇该区域接下来的故事"],
-        ["单纯给家业升级拿奖励", "建筑的整体意境、光影氛围、环境融合"],
-        ["一群老六以及战斗爽", "要来一局紧张刺激的觉瘴林吗？"],
-        ["仔细研究每条属性的收益，追求最优配装", "大概看看，差不多能用就行"],
-        ["仔细看每一句对话，梳理人物关系", "沉浸在剧情氛围里，感受情绪和意境"],
-        ["先试着尝试一下", "好奇会不会和剧情有关联"],
-        ["规划最优采集路线", "看到就采，不会特意去采集"],
-        ["研究连招压制、抓破绽、计算冷却", "凭感觉打，打出自己的节奏和风格"],
-        ["偶尔会看看介绍，但大多直接跳过", "关注并结合真实历史和文物"],
-        ["看攻略视频，背时间轴，记技能顺序", "进去灭几次，然后慢慢记住"],
-        ["想要全收集", "不强求"],
-        ["关注质感、染色、细节和是否符合游戏中的时代", "整体感觉对不对，和角色气质搭不搭"],
-        ["没事做就去治病", "直接去治病"],
-        ["不穿", "选择混搭"],
-        ["事不关己", "帮帮场子"],
-        ["看对方是谁，熟人就带", "开麦指挥"],
-        ["上了再说，就当学学连招", "摆烂"],
-        ["不是很在意", "窗外的风景好不好看、有没有氛围"],
-        ["想清楚每个选项的后果和收益再选", "遵从自己内心的第一感觉"],
-        ["复盘失误原因，指出问题", "如果是故意的下把再这样就优化了"],
-        ["发财了卖了！！！", "自己收集材料自己做"],
-        ["研究过悬赏就算不爽对方也会计算付出的代价", "直接让对方飞起来(神鹰哥同款手势)"],
-        ["直接指出来", "打本前说好就行"],
-        ["百业的要求、福利、活动是否规范", "百业的氛围好不好"],
-        ["每次都要点一下整理", "偶尔点一下整理，平时无所谓"],
-        ["按固定顺序清完，一条龙不落", "直接觉瘴林见"],
-        ["必须去拿，看到后不拿就难受", "记一下位置，以后顺路再来"],
-        ["记下位置，任务做完再回来看", "先钻进去探个究竟"],
-        ["可能有剧情所以每本必捡必读", "无所谓"],
-        ["找到图纸直接套", "想到哪搭到哪，随性发挥"],
-        ["记在心里或设闹钟，准时参加", "知道个大概，有时间就参加"],
-        ["看视频，标点提前规划路线", "不强求"],
-        ["看看自己日常清完了没，有余力就去", "打黑工"],
-        ["规划好用途，优先提升战力", "先买八音窍"],
-        ["更新后看公告，看看武学有无增强和削弱", "不看公告就是玩"],
-        ["有明确的目标和提升计划", "对此没有太大要求"],
-        ["目标明确，步步为营", "随心而行，享受当下"]
+        ["打开好友列表找搭子", "看看有没啥活动和任务", "随便逛逛，走到哪算哪"],
+        ["继续打黑工，或其他活动", "回到单人世界挂机", "副本是啥？不知道"],
+        ["加入聊天，或者看他们聊天", "丝毫不在意", "偶尔瞄一眼，不主动参与"],
+        ["寻求好友帮助", "自己死磕到底，绝不多问一句", "先放一放，随缘解决"],
+        ["有空必到，人多才好玩", "能推就推，更喜欢一个人", "看活动内容和当天心情"],
+        ["和好友组队玩耍", "一个人闲逛做做活动", "时而组队时而独行"],
+        ["用各种方法分享吐槽", "自己消化情绪", "无所谓，输赢看淡"],
+        ["请朋友来参观，听夸夸", "单纯升级", "摆烂或加入同住"],
+        ["和好友一起研究合作", "自己一个人享受独享的成就感", "随缘参加，不强求"],
+        ["没问题，匹配到谁都是缘分", "宁愿和人机打也不想和路人打", "还行，能过就行"],
+        ["立刻分享给好友", "偷偷收藏，然后美美出片", "拍完就忘了"],
+        ["一起玩耍的好搭子", "偶尔一起玩耍就ok", "萍水相逢，聚散随缘"],
+        ["武学的伤害、搭配效果、霸体效果、无敌帧等", "武学的美术、整体的操作手感", "帅不帅，帅就完事了"],
+        ["那里的宝箱、图鉴、材料没拿", "单纯好奇该区域接下来的故事", "路过就收集，不专门跑"],
+        ["单纯给家业升级拿奖励", "建筑的整体意境、光影氛围、环境融合", "无所谓"],
+        ["一群老六以及战斗爽", "要来一局紧张刺激的觉瘴林吗？", "好累啊不想打"],
+        ["仔细研究每条属性的收益，追求最优配装", "大概看看，差不多能用就行", "系统推荐穿什么就穿什么"],
+        ["仔细看每一句对话，梳理人物关系", "沉浸在剧情氛围里，感受情绪和意境", "能跳就跳，大概知道讲啥就行"],
+        ["先试着尝试一下", "好奇会不会和剧情有关联", "路过看看，不刻意研究"],
+        ["规划最优采集路线", "看到就采，不会特意去采集", "包里够用就行，不够再找"],
+        ["研究连招压制、抓破绽、计算冷却", "凭感觉打，打出自己的节奏和风格", "哪里亮了点哪里"],
+        ["偶尔会看看介绍，但大多直接跳过", "关注并结合真实历史和文物", "基本不看"],
+        ["看攻略视频，背时间轴，记技能顺序", "进去灭几次，然后慢慢记住", "大佬带带"],
+        ["想要全收集", "不强求", "随缘跳成就"],
+        ["关注质感、染色、细节和是否符合游戏中的时代", "整体感觉对不对，和角色气质搭不搭", "免费的就穿，花钱的看心情"],
+        ["没事做就去治病", "直接去治病", "我是三更天的"],
+        ["不穿", "选择混搭", "无所谓，随便穿"],
+        ["事不关己", "帮帮场子", "看看有无瓜房"],
+        ["看对方是谁，熟人就带", "开麦指挥", "看不见我看不见我"],
+        ["上了再说，就当学学连招", "摆烂", "正常打，输赢无所谓"],
+        ["不是很在意", "窗外的风景好不好看、有没有氛围", "都可以"],
+        ["想清楚每个选项的后果和收益再选", "遵从自己内心的第一感觉", "随便选，或者查攻略"],
+        ["复盘失误原因，指出问题", "下把再这样就优化了", "沉默不语，心里记下"],
+        ["发财了卖了！！！", "自己收集材料自己做", "先留着，以后再说"],
+        ["研究过悬赏就算不爽对方也会计算付出的代价", "装逼让你飞起来👆🏻", "没关注过这个系统"],
+        ["直接指出来", "打本前说好就行", "无所谓，能过就行"],
+        ["百业的要求、福利、活动是否规范", "百业的氛围好不好", "随便加一个"],
+        ["每次都要点一下整理", "偶尔点一下整理，平时无所谓", "从不整理"],
+        ["按固定顺序清完，一条龙不落", "直接觉瘴林见", "想起来就做，忘了就算了"],
+        ["必须去拿，看到后不拿就难受", "记一下位置，以后顺路再来", "我又不做全收集"],
+        ["记下位置，任务做完再回来看", "先钻进去探个究竟", "不想做"],
+        ["可能有剧情所以每本必捡必读", "无所谓", "捡到就看，没捡到随缘"],
+        ["找到图纸直接套", "想到哪搭到哪，随性发挥", "没认真弄过"],
+        ["记在心里或设闹钟，准时参加", "知道个大概，有时间就参加", "经常错过"],
+        ["看视频，标点提前规划路线", "和好友一起", "随缘，走到哪开到哪"],
+        ["看看自己日常清完了没，有余力就去", "打黑工", "懒得动"],
+        ["规划好用途，优先提升战力", "先买八音窍", "存着，不知道干啥"],
+        ["更新后看公告，看看武学有无增强和削弱", "不看公告就是玩", "随缘，别人玩啥我玩啥"],
+        ["有明确的目标和提升计划", "对此没有太大要求", "差不多就行"],
+        ["目标明确，步步为营", "随心而行，享受当下", "一切随缘，不强求"]
     ];
 
-    // ========== 维度映射 ==========
-    // 1-12: E/I (A=E外向, B=I内向)
-    // 13-25: S/N (A=S实感, B=N直觉)
-    // 26-37: T/F (A=T理性, B=F情感)
-    // 38-50: J/P (A=J判断, B=P感知)
-
-    // ========== 人格库 ==========
+    // ========== 标准16型人格库 ==========
     const personalityMap = {
-        "ISTJ": ["清河拾荒者", "全收集党，图鉴清道夫，规划至上"],
-        "ISFJ": ["青溪守宅人", "佛系建筑师，默默守护，温暖可靠"],
-        "INFJ": ["孤云说书人", "沉浸剧情，心怀江湖大义"],
-        "INTJ": ["墨山布阵师", "策略大师，独行规划者"],
-        "ISTP": ["积粮刺客", "PVP野外独狼，冷静的操作流"],
-        "ISFP": ["醉花阴散人", "换装党+风景党，江湖艺术家"],
-        "INFP": ["天涯流浪客", "纯粹探索玩家，理想主义江湖客"],
-        "INTP": ["天泉问道者", "机制探索党，只对\"为什么\"感兴趣"],
-        "ESTP": ["狂澜弄潮儿", "PVP狂热分子，享受竞技快感"],
-        "ESFP": ["开封交际花", "社交换装党，哪里有热闹哪里就有我"],
-        "ENFP": ["清河探险家", "纯粹探索玩家，好奇驱动一切"],
-        "ENTP": ["无名诡辩者", "PVP心理战大师，享受博弈乐趣"],
-        "ESTJ": ["天泉大管事", "全收集+效率至上，帮会管理型"],
-        "ESFJ": ["青溪掌门人", "PVE团队润滑剂，气氛组担当"],
-        "ENFJ": ["江湖引路人", "PVE指挥型，兼济天下的大哥/大姐"],
-        "ENTJ": ["开封城主", "目标导向的全能型，什么都要最强"]
-    };
+    "ISTJ": ["清河拾荒者", "地图上还有一个光点没捡，我睡不着。包里还有三个格子没填满，我浑身难受。你可以打我，但不能动我的图鉴。"],
+    "ISFJ": ["青溪守宅人", "外面打打杀杀，不如回家种花。家业等级必须拉满，家具摆放必须对称。江湖风浪大，我在青溪等你喝茶。"],
+    "INFJ": ["孤云说书人", "我听的不仅是故事，是江湖。每一封信札都是一个人生，每一段剧情都值得流泪。你问我为什么不做日常？因为我在看剧情。"],
+    "INTJ": ["觉瘴林战神", "解毒丸还剩3分20秒，一切尽在掌握。林子里每种毒蘑菇的刷新CD我倒背如流。别人进觉瘴林是探险，我进觉瘴林是回家。"],
+    "ISTP": ["积粮刺客", "别说话，看操作。连招已刻进肌肉记忆，破绽判定已成条件反射。论剑场从不废话，只用剑说话。"],
+    "ISFP": ["醉花阴散人", "战力不重要，今天穿什么才重要。这套染色配开封的晚霞绝了，那套混搭才是真正的江湖美学。副本可以灭，穿搭不能乱。"],
+    "INFP": ["天涯流浪客", "任务是什么？我只是路过看风景。开封虹桥的落日、清河的晨雾、觉瘴林的迷雾，都值得我停下脚步。江湖不是打打杀杀，是诗和远方。"],
+    "INTP": ["天泉问道者", "这个机制的底层逻辑是什么？为什么这个Boss的仇恨值是这么算的？这套武学的伤害公式到底怎么推导？别催我打本，我在研究。"],
+    "ESTP": ["论剑佬", "我的一辈子都被PVP毁了。今天论剑不赢不休，赢了还想赢，输了更想赢。什么日常副本奇遇，都不如论剑场的一把痛快。"],
+    "ESFP": ["开封交际花", "哪里有热闹，哪里就有我。虹桥上挂机聊天是我，世界频道整活是我，百业活动气氛组还是我。江湖不能没有我这样的乐子人。"],
+    "ENFP": ["清河探险家", "那边有个洞，我钻一下，任务等下再说。什么？那边还有个屋顶能爬？等等我！探索迷雾的快乐你根本不懂！"],
+    "ENTP": ["无名诡辩者", "你确定你懂这个游戏？你确定这套连招是最优解？你确定这个机制是这样理解的？来，我们论剑场见真章，输了叫我爸爸。"],
+    "ESTJ": ["天泉大管事", "效率第一，感情第二。日常清完没有？副本CD打了没有？战力达标了没有？别跟我谈江湖情怀，数据才是硬道理。"],
+    "ESFJ": ["青溪掌门人", "副本缺人？我组，我喊，我带。团灭了？没事，我安慰。有人划水？算了算了，能过就行。这个家没我得散。"],
+    "ENFJ": ["江湖引路人", "跟着我，保你过关。萌新别怕，我带你打本。卡关了？我教你机制。江湖路远，总得有人点一盏灯。"],
+    "ENTJ": ["开封城主", "这个江湖，我说了算。战力榜必须前十，百业必须最强，副本首通必须有我名字。要么不做，要做就做最强。"]
+};
+
+    // ========== 绰号映射 ==========
+    const nicknameMap = {
+    "ISTJ": "QINGHEJIANSHI", "ISFJ": "QINGXISHOUZHAI", "INFJ": "GUYUNSHUOSHU",
+    "INTJ": "JUEZHANGSHEN", "ISTP": "JILIANGCISI", "ISFP": "ZUIHUAYINSAN",
+    "INFP": "TIANYALIULANG", "INTP": "TIANQUANWENDAO", "ESTP": "LUNJIANLAO",
+    "ESFP": "KAIFENGJIAOJI", "ENFP": "QINGHETANXIAN", "ENTP": "WUMINGGUIBIAN",
+    "ESTJ": "TIANQUANDAGUAN", "ESFJ": "QINGXIZHANGMEN", "ENFJ": "JIANGHUYINLU",
+    "ENTJ": "KAIFENGCHENGZHU"
+};
+
+    // ========== 佛系称号库 ==========
+   const xTitles = {
+    4: ["逍遥散人", "不强求任何玩法，主打一个自在随缘。日常忘了就忘了，副本错过就错过，战力高低无所谓，风景好看就行。江湖这么大，躺着看也挺好。"],
+    3: ["江湖隐士", "大隐隐于市，你只在意的领域认真。平时佛系随缘，但碰到来劲的事比谁都较真。江湖人送外号：选择性强迫症患者。"],
+    2: ["自在侠客", "有坚持也有随性，江湖路上走得潇洒。该肝的时候绝不含糊，该躺的时候绝不动弹。主打一个张弛有度，收放自如。"],
+    1: ["偏锋行者", "大体方向明确，只在某处留有余地。九成的事情你都较真，唯独那一成你说随缘。剑走偏锋，亦有章法。"]
+};
+    const xNicknames = {
+    4: "XIAOYAOSANREN",
+    3: "JIANGHUYINSHI",
+    2: "ZIZAIXIAKE",
+    1: "PIANFENGXINGZHE"
+};
 
     // ========== 状态变量 ==========
     let currentIndex = 0;
     const answers = new Array(50).fill(null);
-    let ei = [0, 0], sn = [0, 0], tf = [0, 0], jp = [0, 0];
+    let ei = [0, 0, 0], sn = [0, 0, 0], tf = [0, 0, 0], jp = [0, 0, 0];
 
     // ========== DOM 元素 ==========
     const qText = document.getElementById('qText');
@@ -444,8 +386,8 @@
         const selected = answers[index];
         let html = '';
         const opts = optionTexts[index];
-        for (let i = 0; i < 2; i++) {
-            const letter = i === 0 ? 'A' : 'B';
+        for (let i = 0; i < 3; i++) {
+            const letter = i === 0 ? 'A' : (i === 1 ? 'B' : 'C');
             html += `<div class="option ${selected === i ? 'selected' : ''}" data-opt="${i}"><span class="option-prefix">${letter}</span>${opts[i]}</div>`;
         }
         optionsDiv.innerHTML = html;
@@ -462,22 +404,37 @@
 
     // ========== 计算结果 ==========
     function calculateResult() {
-        ei = [0, 0]; sn = [0, 0]; tf = [0, 0]; jp = [0, 0];
+        ei = [0, 0, 0]; sn = [0, 0, 0]; tf = [0, 0, 0]; jp = [0, 0, 0];
         for (let i = 0; i < 50; i++) {
             const ans = answers[i];
             if (ans === null) continue;
-            if (i < 12) { if (ans === 0) ei[0]++; else ei[1]++; }
-            else if (i < 25) { if (ans === 0) sn[0]++; else sn[1]++; }
-            else if (i < 37) { if (ans === 0) tf[0]++; else tf[1]++; }
-            else { if (ans === 0) jp[0]++; else jp[1]++; }
+            if (i < 12) { 
+                if (ans === 0) ei[0]++; 
+                else if (ans === 1) ei[1]++; 
+                else ei[2]++; 
+            } else if (i < 25) { 
+                if (ans === 0) sn[0]++; 
+                else if (ans === 1) sn[1]++; 
+                else sn[2]++; 
+            } else if (i < 37) { 
+                if (ans === 0) tf[0]++; 
+                else if (ans === 1) tf[1]++; 
+                else tf[2]++; 
+            } else { 
+                if (ans === 0) jp[0]++; 
+                else if (ans === 1) jp[1]++; 
+                else jp[2]++; 
+            }
         }
 
         const getLetter = (arr, dimType) => {
-            if (arr[0] === arr[1]) return 'X';
-            if (dimType === 'EI') return arr[0] > arr[1] ? 'E' : 'I';
-            if (dimType === 'SN') return arr[0] > arr[1] ? 'S' : 'N';
-            if (dimType === 'TF') return arr[0] > arr[1] ? 'T' : 'F';
-            return arr[0] > arr[1] ? 'J' : 'P';
+            const total = arr[0] + arr[1] + arr[2];
+            if (total === 0) return 'X';
+            if (arr[2] > total * 0.4) return 'X';
+            if (dimType === 'EI') return arr[0] >= arr[1] ? 'E' : 'I';
+            if (dimType === 'SN') return arr[0] >= arr[1] ? 'S' : 'N';
+            if (dimType === 'TF') return arr[0] >= arr[1] ? 'T' : 'F';
+            return arr[0] >= arr[1] ? 'J' : 'P';
         };
 
         const e = getLetter(ei, 'EI');
@@ -486,20 +443,22 @@
         const j = getLetter(jp, 'JP');
         const code = e + s + t + j;
 
-        let name, desc;
-        if (code === 'XXXX') {
-            name = '逍遥散人';
-            desc = '不强求任何玩法，主打一个自在随缘。';
-        } else if (code.includes('X')) {
-            name = '江湖散修';
-            desc = '你有一面随性自在，但在某些方面仍有自己的坚持与风格。';
+        const letters = [e, s, t, j];
+        const xCount = letters.filter(l => l === 'X').length;
+
+        let name, desc, nickname;
+        if (xCount > 0) {
+            name = xTitles[xCount][0];
+            desc = xTitles[xCount][1];
+            nickname = xNicknames[xCount];
         } else {
             const p = personalityMap[code] || ['江湖异人', '身怀绝技，不落窠臼。'];
             name = p[0];
             desc = p[1];
+            nickname = nicknameMap[code] || 'JIANGHU';
         }
 
-        document.getElementById('resultCode').textContent = code;
+        document.getElementById('nicknameBadge').textContent = nickname;
         document.getElementById('resultName').textContent = name;
         document.getElementById('resultDesc').textContent = desc;
         document.getElementById('dimensionDetail').innerHTML = `
